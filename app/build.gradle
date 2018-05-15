@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    //test
+
+    //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
+    //    testImplementation 'junit:junit:4.12'
+
+    //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //basic
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+
+    //RxJava
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+
+    //okHttp
+    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingInterceptorVersion"
+
+    //retrofit2
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitConverterGsonVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitAdapterRxjavaVersion"
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+
+    //butterknife
+    compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+
+    //refresh loadMore
+//    compile "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.SmartRefreshLayoutVersion"
+//    compile "com.scwang.smartrefresh:SmartRefreshHeader:$rootProject.SmartRefreshHeaderVersion"
+    compile "org.greenrobot:greendao:$rootProject.greendaoVersion"
+
+    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation files('libs/sdk_HeWeather_Public_Android_V122.jar')
+}
