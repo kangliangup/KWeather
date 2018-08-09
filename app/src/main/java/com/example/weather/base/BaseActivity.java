@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,15 +27,27 @@ public abstract  class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     protected BaseApplication mApp;
 
+    public static final int STATUSBAR_TRANSLANT=0;//状态栏透明StatusBar
+    protected int statusBarState;
+
+
+    protected int setStatusBarState(){
+        return STATUSBAR_TRANSLANT;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mContext = this;
         mApp = BaseApplication.getInstance();
+
+
         ActivityManager.getInstance().addActivity(this);
 //        registerReceiver();
 
     }
+
 
     /**
      * 监听网络状态

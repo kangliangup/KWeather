@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+
+    <!--text color-->
+    <!--用于重要文字、标题-->
+    <color name="text_color_black_22">#222222</color>
+    <!-- 用于普通文字信息、段落等-->
+    <color name="text_color_grey_66">#666666</color>
+    <!--用于辅助文字-->
+    <color name="text_color_grey_light_99">#999999</color>
+
+
+    <!--用于价格方面的文字-->
+    <color name="text_color_red_price">#e4393c</color>
+    <color name="text_color_orange">#FD7923</color>
+
+    <color name="text_color_green">#33b679</color>
+
+
+    <!--白色文字-->
+    <color name="white">#ffffff</color>
+
+    <!--用于分割线、标签描边-->
+    <color name="divider_color_grey_d7">#d7d7d7</color>
+
+    <!--用于内容区域底色、分割模块颜色-->
+    <color name="background_color_grey_f5">#f3f5f7</color>
+    <color name="background_color_grey_f8">#f8f8f8</color>
+    <!--activity、fragment背景颜色、搜索框-->
+    <color name="background_color_grey_ee">#eeeeee</color>
+    <color name="background_color_grey_99">#999999</color>
+
+
+    <color name="translate_80">#80000000</color>
+
+
+    <color name="alpha_05_white">#0DFFFFFF</color>
+    <color name="alpha_10_white">#1AFFFFFF</color>
+    <color name="alpha_15_white">#26FFFFFF</color>
+    <color name="alpha_20_white">#33FFFFFF</color>
+    <color name="alpha_25_white">#40FFFFFF</color>
+    <color name="alpha_30_white">#4DFFFFFF</color>
+
+    <color name="alpha_05_black">#0D000000</color>
+    <color name="alpha_10_black">#1A000000</color>
+    <color name="alpha_15_black">#26000000</color>
+    <color name="alpha_20_black">#33000000</color>
+    <color name="alpha_25_black">#40000000</color>
+    <color name="alpha_30_black">#4D000000</color>
+    <color name="alpha_35_black">#59000000</color>
+
 </resources>

@@ -3,23 +3,43 @@ package com.example.weather.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.example.weather.widget.MyProgressDialog;
 
 
 public abstract class MvpBaseFragment<V extends BaseView, P extends MvpBasePresenter<V>> extends BaseFragment {
 
-    private boolean isVisible;                  //是否可见状态
-    private boolean isPrepared;                 //标志位，View已经初始化完成。
-    private boolean isFirstLoad = true;         //是否第一次加载
-//    protected Context mContext;
+
     protected P mPresenter;
+
+    /**
+     * fragment是否创建完成
+     */
+    private boolean isViewCreated;
+
+    /**
+     * fragment是否可见
+     */
+    private boolean isUIVisible;
+
+    /**
+     * 是否加载过数据
+     */
+    private boolean isDataLoaded;
+
 
     /**
      * 实例化presenter
      */
     public abstract P initPresenter();
+
+    /**
+     * 懒加载数据
+     */
+    protected abstract  void lazyLoadData();
 
 
     protected void showLoading() {
@@ -30,12 +50,11 @@ public abstract class MvpBaseFragment<V extends BaseView, P extends MvpBasePrese
         MyProgressDialog.dismissDialog();
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFirstLoad = true;
-        isPrepared = true;
-        lazyLoad();
+        isDataLoaded =false;
     }
     /**
      * 如果是与ViewPager一起使用，调用的是setUserVisibleHint
@@ -43,12 +62,12 @@ public abstract class MvpBaseFragment<V extends BaseView, P extends MvpBasePrese
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
-            onVisible();
+        //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
         } else {
-            isVisible = false;
-            onInvisible();
+            isUIVisible = false;
         }
     }
 
@@ -59,6 +78,7 @@ public abstract class MvpBaseFragment<V extends BaseView, P extends MvpBasePrese
 //    @Override
 //    public void onHiddenChanged(boolean hidden) {
 //        super.onHiddenChanged(hidden);
+//
 //        if (!hidden) {
 //            isVisible = true;
 //            onVisible();
@@ -68,25 +88,28 @@ public abstract class MvpBaseFragment<V extends BaseView, P extends MvpBasePrese
 //        }
 //    }
 
-    protected void onVisible() {
-        lazyLoad();
-    }
+    private void lazyLoad() {
+        //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,
+        // 并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
+        if (isViewCreated&&isUIVisible&& !isDataLoaded) {
+            lazyLoadData();
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false;
+            isUIVisible = false;
+            isDataLoaded =true;
 
-    protected void onInvisible() {
-    }
 
-    protected void lazyLoad() {
-        if (!isPrepared || !isVisible || !isFirstLoad) {
-            return;
         }
-        isFirstLoad = false;
     }
+
+
+
+
 
     @SuppressWarnings("unchecked")
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        this.mContext = context;
         mPresenter = initPresenter();
         mPresenter.attachView((V) this);
     }
@@ -114,6 +137,15 @@ public abstract class MvpBaseFragment<V extends BaseView, P extends MvpBasePrese
 //            this.getView().setVisibility(menuVisibility ? View.VISIBLE : View.GONE);
 //        }
 //    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isViewCreated = true;
+        lazyLoad();
+    }
+
 
 
 }

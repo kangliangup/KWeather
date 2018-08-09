@@ -38,6 +38,7 @@ dependencies {
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
 
     //RxJava
+    implementation 'com.android.support:support-v4:27.1.1'
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
 
@@ -62,4 +63,12 @@ dependencies {
 
     compile "com.google.code.gson:gson:$rootProject.gsonVersion"
     implementation files('libs/sdk_HeWeather_Public_Android_V122.jar')
+
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    compile ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
+
+    compile 'me.relex:circleindicator:1.2.2@aar'
 }

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.weather.activiy.SplashActivity">
+    android:id="@+id/rl"
+    tools:context="com.example.weather.activity.SplashActivity">
 
-</android.support.constraint.ConstraintLayout>
+<ImageView
+    android:id="@+id/iv_splash"
+    android:src="@mipmap/splash_afternoon"
+    android:scaleType="centerCrop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/app_name" />
+
+</RelativeLayout>
