@@ -59,6 +59,7 @@ public class WeatherFragment extends MvpBaseFragment<WeatherContract.View,Weathe
     @Override
     protected void lazyLoadData() {
         Logger.e(mParam1);
+        mPresenter.getWeatherNow("");
     }
 
 

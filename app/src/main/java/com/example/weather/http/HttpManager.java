@@ -23,7 +23,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpManager {
-    private static final String baseUrl = "http://123.56.207.219:9002";//瑞福德外网服务器测试地址
+    private static final String baseUrl = "https://www.wanandroid.com";//瑞福德外网服务器测试地址
 //    private static final String baseUrl = "http://hmcwcs.haima.com:9002";//瑞福德外网服务器测试地址
     //时间超时
     private static final int TIMEOUT = 30;

@@ -53,6 +53,7 @@ public class MainActivity extends MvpBaseActivity<MainContract.View, MainPresent
         ButterKnife.bind(this);
 
         StatusBarHelper.setStatusTranslucent(this, rlTop);
+//        StatusBarHelper.setStatusColor(this,Color.RED);
 
 //        mPresenter.getWeatherNow("");
         getData();

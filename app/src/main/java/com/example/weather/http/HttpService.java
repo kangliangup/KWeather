@@ -1,8 +1,12 @@
 package com.example.weather.http;
 
 
+import com.example.weather.bean.ChapterData;
 
+import java.util.List;
 
+import io.reactivex.Observable;
+import retrofit2.http.GET;
 
 /**
  * Date：2018/2/7
@@ -22,9 +26,11 @@ public interface HttpService {
 //
 ////    );
 //    @GET("/cs/mobile/syncVisitTask")
-//    Observable<HttpResultList<TaskDetailResult>> getTaskDetail(
-//            @Query(value = "_appTicket") String cookie,
-//            @Query(value = "taskId") String taskId
-//    );
+////    Observable<HttpResultList<TaskDetailResult>> getTaskDetail(
+////            @Query(value = "_appTicket") String cookie,
+////            @Query(value = "taskId") String taskId
+////    );
+@GET("/wxarticle/chapters/json")
+Observable<HttpResultData<List<ChapterData>>> getChapters();
 }
 

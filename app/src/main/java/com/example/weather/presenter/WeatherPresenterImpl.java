@@ -1,20 +1,20 @@
 package com.example.weather.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.weather.base.MvpBasePresenter;
-import com.example.weather.contract.MainContract;
+import com.example.weather.bean.ChapterData;
 import com.example.weather.contract.WeatherContract;
-import com.google.gson.Gson;
+import com.example.weather.http.HttpManager;
+import com.example.weather.http.HttpObserverData;
+import com.example.weather.http.HttpResultData;
+import com.example.weather.http.HttpTransformer;
+import com.example.weather.util.GsonUtils;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
-import interfaces.heweather.com.interfacesmodule.bean.Lang;
-import interfaces.heweather.com.interfacesmodule.bean.Unit;
-import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now;
-import interfaces.heweather.com.interfacesmodule.view.HeWeather;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by 小康生活 on 2018/5/15.
@@ -30,6 +30,28 @@ public  class WeatherPresenterImpl extends MvpBasePresenter<WeatherContract.View
 
     @Override
     public void getWeatherNow(String city) {
+        HttpManager.API()
+                .getChapters()
+                .compose(HttpTransformer.<HttpResultData<List<ChapterData>>>applyIoSchedulers())
+                .subscribe(new HttpObserverData<List<ChapterData>>(mContext) {
+                    @Override
+                    protected void onSuccess(HttpResultData<List<ChapterData>> result) {
+                       Logger.json( GsonUtils.GsonString(result));
+                        System.out.println("onSuccess");
+                    }
+
+                    @Override
+                    protected void onFailure(Throwable e) {
+                        System.out.println("onFailure");
+                        System.out.println(e.getMessage());
+                    }
+
+                    @Override
+                    protected void onStart(Disposable d) {
+                        addToComposite(d);
+                    }
+
+                });
 
     }
 
